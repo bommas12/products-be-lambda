@@ -1,0 +1,26 @@
+service: product-service
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+# you can overwrite defaults here
+  stage: dev
+  region: ap-south-1
+
+
+functions:
+  productList:
+    handler: productList.getList
+    events:
+      - httpApi:
+          path: /products
+          method: get
+  productById:
+    handler: productById.getById
+    events:
+      - httpApi:
+          path: /products/{id}
+          method: get
